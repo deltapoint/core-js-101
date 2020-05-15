@@ -262,8 +262,17 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  let result = 0;
+  const ccnStr = ccn.toString();
+  for (let i = 0; i < ccnStr.length; i += 1) {
+    if (ccnStr.length % 2 !== i % 2) {
+      result += ccnStr[i] * 1;
+    } else {
+      result += ccnStr[i] * 2 + (ccnStr[i] > 4 ? -9 : 0);
+    }
+  }
+  return result % 10 === 0;
 }
 
 /**
@@ -406,8 +415,8 @@ function getMatrixProduct(m1, m2) {
     result[i] = [];
     for (let j = 0; j < m2[0].length; j += 1) {
       let product = 0;
-      for (let z = 0; z < m1[0].length; z += 1) {
-        product += m1[i][z] * m2[z][j];
+      for (let k = 0; k < m1[0].length; k += 1) {
+        product += m1[i][k] * m2[k][j];
       } result[i][j] = product;
     }
   }
